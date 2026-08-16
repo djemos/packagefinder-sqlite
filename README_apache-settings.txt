@@ -33,7 +33,7 @@ SSLSessionCacheTimeout  300
     CustomLog "/var/log/httpd/packagefinder.ddnsfree.com-access_log" common
     
     <If "%{REQUEST_URI} !~ m#/\.well-known/acme-challenge/#">
-        Redirect permanent / https://packagefinder.ddnsfree.com/slackel/
+        Redirect permanent / https://packagefinder.ddnsfree.com/
     </If> 
     
     RewriteEngine On
