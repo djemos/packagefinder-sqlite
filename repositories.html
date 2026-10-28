@@ -227,9 +227,9 @@ a {
 
 <div id="repos"></div>
 
-<!-- ΠΡΟΣΘΗΚΗ: Το HTML του Footer -->
+<!-- ADDITION: The Footer HTML -->
 <div class="footer">
-    &copy; 2026 Developed by <strong>Dimitris Tzemos</strong>. All rights reserved | <a href="index.html">Package Finder</a>
+   Copyright &copy; 2026 Developed by <strong>Dimitris Tzemos</strong>. All rights reserved | <a href="index.html">Package Finder</a>
 </div>
 <script>
 function initTheme() {
@@ -319,7 +319,7 @@ fetch("/api/repositories.py")
                 <strong><a href="${r.url}" target="_blank">${r.name}</a></strong>
                 <span class="description-text">${r.description || 'No description available.'}</span>
             </td>
-            <!-- ΔΙΟΡΘΩΣΗ: Προσθήκη &arch= ώστε να μην γυρίζει το radio button στο ALL -->
+            <!-- CORRECTION: Add &arch= so that the radio button does not revert to ALL -->
             <td>
                 <a class="filter-link" href="index.html?search=${encodeURIComponent(targetDistro)}&arch=${encodeURIComponent(cleanArch)}">
                     ${r.slackware_version}
