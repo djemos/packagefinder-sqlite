@@ -6,7 +6,7 @@
 <title>Repository Info</title>
 
 <style>
-/* ΟΡΙΣΜΟΣ ΜΕΤΑΒΛΗΤΩΝ ΓΙΑ LIGHT ΚΑΙ DARK MODE */
+/* DEFINING VARIABLES FOR LIGHT AND DARK MODE */
 :root {
     --bg-color: #fdfdfd;
     --text-color: #333333;
@@ -124,10 +124,10 @@ a {
 
 <!-- Το HTML του Footer -->
 <div class="footer">
-    &copy; 2026 Developed by <strong>Dimitris Tzemos</strong>. All rights reserved | <a href="index.html">Slackel Package Finder</a>
+   Copyright &copy; 2026 Developed by <strong>Dimitris Tzemos</strong>. All rights reserved | <a href="index.html">Slackel Package Finder</a>
 </div>
 <script>
-// Συναρτήσεις για τη διαχείριση του Dark Mode
+// Functions for managing Dark Mode
 function initTheme() {
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
@@ -148,7 +148,7 @@ function toggleTheme() {
     }
 }
 
-// Αρχικοποίηση θέματος
+// Topic initialization
 initTheme();
 
 let params = new URLSearchParams(window.location.search);
