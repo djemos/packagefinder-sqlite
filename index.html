@@ -6,7 +6,7 @@
 <title>Slackel Package Finder</title>
 
 <style>
-/* ΟΡΙΣΜΟΣ ΜΕΤΑΒΛΗΤΩΝ ΓΙΑ LIGHT ΚΑΙ DARK MODE */
+/* DEFINING VARIABLES FOR LIGHT AND DARK MODE */
 :root {
     --bg-color: #fdfdfd;
     --text-color: #333333;
@@ -260,26 +260,26 @@ body {
 
 <div id="counter" style="margin-top:15px; font-weight:bold;"></div>
 
-<!-- ΠΡΟΣΘΗΚΗ: Το ΠΑΝΩ container σελιδοποίησης (πριν από τα αποτελέσματα) -->
+<!-- ADDITION: The TOP pagination container (before the results) -->
 <div id="pagination-container-top" style="margin-top: 15px; margin-bottom: 10px; text-align: center; font-size: 15px;"></div>
 
 <div id="results"></div>
 
-<!-- Το ΚΑΤΩ container σελιδοποίησης (μετά τα αποτελέσματα) -->
+<!-- The BOTTOM layout container (after the results) -->
 <div id="pagination-container" style="margin-top: 25px; text-align: center; font-size: 15px;"></div>
 
 </div>
 
 <div class="footer">
-    &copy; 2026 Developed by <strong>Dimitris Tzemos</strong>. All rights reserved | <a href="index.html">Package Finder</a>
+    Copyright &copy; 2026 Developed by <strong>Dimitris Tzemos</strong>. All rights reserved | <a href="index.html">Package Finder</a>
 </div>
 
 <script>
 let activeRepoFilter = "";
 let isInitialSetup = true;
-let allFetchedPackages = []; // Αποθήκευση όλων των πακέτων από το backend
-let currentPage = 1;         // Τρέχουσα σελίδα
-const perPage = 30;          // Σταθερά 30 στοιχεία ανά σελίδα
+let allFetchedPackages = []; // Save all packages from the backend
+let currentPage = 1;         // Current page
+const perPage = 30;          // Fixed at 30 items per page
 
 function initTheme() {
     if (localStorage.getItem('theme') === 'dark') {
@@ -322,7 +322,7 @@ function searchPackages(){
         q = `${searchBoxValue} ${distroSelectValue}`;
     }
 
-    // Σωστό, σχετικό μονοπάτι χωρίς αρχική κάθετο
+    // Valid, relative path without a leading slash
     fetch('api/stats.py', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -332,7 +332,7 @@ function searchPackages(){
     let selectedArch = document.querySelector('input[name="arch"]:checked').value;
     let searchType = document.getElementById("search_type").value;
 
-    // Σωστό, σχετικό μονοπάτι χωρίς αρχική κάθετο
+    // Valid, relative path without a leading slash
     let apiUrl = `api/packages.py?q=${encodeURIComponent(q)}&type=${searchType}&arch=${selectedArch}`;
 
     document.getElementById("counter").innerText = "Searching...";
@@ -348,7 +348,7 @@ function searchPackages(){
         allFetchedPackages = data;
         document.getElementById("counter").innerText = `Found ${allFetchedPackages.length} package(s)`;
 
-        // Εμφάνιση της 1ης σελίδας
+        // Display page 1
         displayCurrentPage(1);
     })
     .catch(err => {
@@ -356,11 +356,11 @@ function searchPackages(){
         console.error(err);
     });
 }
-// ΝΕΑ ΣΥΝΑΡΤΗΣΗ: Απομονώνει και σχεδιάζει μόνο 30 πακέτα για την επιλεγμένη σελίδα
+// NEW FUNCTION: Isolates and plots only 30 packets for the selected page
 function displayCurrentPage(page) {
     currentPage = page;
     
-    // Υπολογισμός των δεικτών για το slice (ανά 30 στοιχεία)
+    // Calculation of the indicators for the slice (per 30 elements)
     let start_idx = (currentPage - 1) * perPage;
     let end_idx = start_idx + perPage;
     let slicedPackages = allFetchedPackages.slice(start_idx, end_idx);
@@ -419,7 +419,7 @@ function renderPagination(currentPage, totalPages) {
 
     if (totalPages <= 1) return;
 
-    // Εσωτερική βοηθητική συνάρτηση για τη δημιουργία της γραμμής κουμπιών
+    // Internal helper function for creating the button row
     function createControls() {
         const wrapper = document.createDocumentFragment();
 
@@ -452,7 +452,7 @@ function renderPagination(currentPage, totalPages) {
         return wrapper;
     }
 
-    // Προσθήκη των κουμπιών και στα δύο containers της HTML
+    // Adding the buttons to both HTML containers
     topContainer.appendChild(createControls());
     bottomContainer.appendChild(createControls());
 }
@@ -545,7 +545,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
     
-    // Σωστό, σχετικό μονοπάτι χωρίς αρχική κάθετο
+    // Valid, relative path without a leading slash
     fetch('api/stats.py').catch(err => console.error(err));
 
     if (document.getElementById("search").value.trim() !== "") {
@@ -557,7 +557,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 200);
 }); // Εδώ κλείνει το DOMContentLoaded
 
-// Εξασφαλίζει τον καθαρισμό σε κάθε Back/Forward στον Firefox
+// Ensures cleaning on every Back/Forward action in Firefox
 window.addEventListener("pageshow", (event) => {
     activeRepoFilter = "";
     if (window.location.search) {
